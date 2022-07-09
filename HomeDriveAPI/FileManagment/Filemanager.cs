@@ -5,7 +5,7 @@ namespace HomeDriveAPI.FileManagment
     {
         private static readonly object _lockForSaving = new object();
         private static readonly object _lockForDeleting = new object();
-        private static readonly string _drivepath = "drive";
+        private static readonly string _drivepath = "./drive";
         public static bool SaveFilesAsync(List<IFormFile> files)
         {
             try
@@ -56,7 +56,7 @@ namespace HomeDriveAPI.FileManagment
                     if (File.Exists($"{_drivepath}/{file}"))
                     {
                         byte[] buffer = null;
-                        using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
+                        using (FileStream fs = new FileStream($"{_drivepath}/{file}", FileMode.Open, FileAccess.Read))
                         {
                             buffer = new byte[fs.Length];
                             fs.Read(buffer, 0, (int)fs.Length);

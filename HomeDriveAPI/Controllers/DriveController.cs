@@ -39,8 +39,8 @@ namespace HomeDriveAPI.Controllers
         }
 
         [HttpGet]
-        [Route("[action]")]
-        public ActionResult DownloadFile([FromHeader] string pathOfFileToDownload)
+        [Route("[action]/{pathOfFileToDownload}")]
+        public ActionResult DownloadFile([FromRoute] string pathOfFileToDownload)
         {
             var filedata = Filemanager.ReturnFile(pathOfFileToDownload);
             var contentType = "multipart/form-data";
