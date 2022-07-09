@@ -1,0 +1,9 @@
+testFiles/
+HomeDriveAPI/bin/
+HomeDriveAPI/obj/staticwebassets.pack.sentinel
+HomeDriveAPI/obj/
+HomeDrive/wwwroot/
+HomeDrive/obj/
+.vs/
+HomeDrive/bin/
+HomeDriveAPI/drive/
