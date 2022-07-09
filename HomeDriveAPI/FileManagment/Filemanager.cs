@@ -55,11 +55,10 @@ namespace HomeDriveAPI.FileManagment
                 {
                     if (File.Exists($"{_drivepath}/{file}"))
                     {
-                        byte[] buffer = null;
                         using (FileStream fs = new FileStream($"{_drivepath}/{file}", FileMode.Open, FileAccess.Read))
                         {
-                            buffer = new byte[fs.Length];
-                            fs.Read(buffer, 0, (int)fs.Length);
+                            bytes = new byte[fs.Length];
+                            fs.Read(bytes, 0, (int)fs.Length);
                         }
                     }
                     return bytes;
