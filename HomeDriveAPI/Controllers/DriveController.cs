@@ -24,7 +24,8 @@ namespace HomeDriveAPI.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public ActionResult UploadFiles(List<IFormFile> files)
+        [RequestSizeLimit(3000000000)]
+        public ActionResult UploadFiles([FromForm] List<IFormFile> files)
         {
             Filemanager.SaveFilesAsync(files);
             return Ok();
