@@ -1,6 +1,5 @@
 ﻿using HomeDriveAPI.FileManagment;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace HomeDriveAPI.Controllers
 {
