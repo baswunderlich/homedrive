@@ -6,14 +6,14 @@ namespace HomeDriveAPI.FileManagment
         private static readonly object _lockForSaving = new object();
         private static readonly object _lockForDeleting = new object();
         private static readonly string _drivepath = "./drive";
-        public static bool SaveFilesAsync(List<IFormFile> files)
+        public static bool SaveFilesAsync(List<IFormFile> files, string pathOfDirectory)
         {
             try
             {
                 foreach (var file in files)
                 {
                     lock (_lockForSaving) {
-                        var fStream = File.Create($"{_drivepath}/{file.FileName}");
+                        var fStream = File.Create($"{_drivepath}/{pathOfDirectory}/{file.FileName}");
                         file.CopyTo(fStream);
                         fStream.Flush();
                     }
@@ -74,6 +74,30 @@ namespace HomeDriveAPI.FileManagment
         {
             var dirInfo = new DirectoryInfo(_drivepath);
             return dirInfo.GetFiles().Select(f => f.Name).ToList();
+        }
+
+        public static bool CreateDirectory(string pathOfNewDirectory)
+        {
+            lock (_lockForSaving)
+            {
+                if (Directory.Exists($"{_drivepath}/{pathOfNewDirectory}"))
+                    return false;
+                else
+                    Directory.CreateDirectory($"{_drivepath}/{pathOfNewDirectory}");
+            }
+            return true;
+        }
+
+        public static void DeleteDirectory(string dirName)
+        {
+            lock (_lockForDeleting)
+            {
+                try
+                {
+                    Directory.Delete($"{_drivepath}/{dirName}", true);
+                }
+                catch (Exception) { }
+            }
         }
     }
 }
