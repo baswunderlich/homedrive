@@ -22,11 +22,11 @@ namespace HomeDriveAPI.Controllers
         }
 
         [HttpPost]
-        [Route("[action]/{pathOfDirectory}")]
+        [Route("[action]")]
         [RequestSizeLimit(3000000000)]
-        public ActionResult UploadFiles([FromForm] List<IFormFile> files, [FromRoute] string pathOfDirectory)
+        public ActionResult UploadFiles([FromForm] List<IFormFile> files)
         {
-            Filemanager.SaveFilesAsync(files, pathOfDirectory);
+            Filemanager.SaveFilesAsync(files);
             return Ok();
         }
 
@@ -45,25 +45,6 @@ namespace HomeDriveAPI.Controllers
             var filedata = Filemanager.ReturnFile(pathOfFileToDownload);
             var contentType = "multipart/form-data";
             return File(filedata, contentType);
-        }
-
-        [HttpPost]
-        [Route("[action]")]
-        public ActionResult CreateDirectory(string pathOfNewDirectory)
-        {
-            var succes = Filemanager.CreateDirectory(pathOfNewDirectory);
-            if (succes)
-                return Ok();
-            else
-                return BadRequest("This path is either not valid or the directory already exists");
-        }
-
-        [HttpDelete]
-        [Route("[action]")]
-        public ActionResult DeleteDirectory(string nameOfDirectory)
-        {
-            Filemanager.DeleteDirectory(nameOfDirectory);
-            return Ok();
         }
     }
 }
