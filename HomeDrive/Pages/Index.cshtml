@@ -1,4 +1,14 @@
 ﻿@page
 <html>
+	<script>
+		fetch( 'http://localhost:49157/Drive/GetAllFiles' ,
+            {
+				method: "GET"
+			}
+		)
+		.then( response => 
+		document.write(response.json()))
+		document.write("hello there\n")
+	</script>
 	Here you should be able to click buttons whick communicate with the API
 </html>

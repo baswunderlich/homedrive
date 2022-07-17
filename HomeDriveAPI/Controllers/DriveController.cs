@@ -1,8 +1,10 @@
 ﻿using HomeDriveAPI.FileManagment;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeDriveAPI.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     [Route("[controller]")]
     public class DriveController : ControllerBase
